@@ -1,4 +1,4 @@
-ㄙ// 書籍資料庫
+// 書籍資料庫
 const bookDatabase = {
     happy: [
         {
@@ -640,65 +640,17 @@ async function showBookRecommendation(mood) {
         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
 
-    // 顯示設計封面的函數
-    function showDesignedCover() {
-        bookCover.style.background = 'linear-gradient(135deg, var(--primary-cyan), var(--primary-purple))';
-        bookCover.innerHTML = `
-            <div class="cover-content">
-                <div class="cover-emoji">${randomBook.emoji}</div>
-                <div class="cover-title">${randomBook.title}</div>
-                <div class="cover-divider"></div>
-                <div class="cover-author">${randomBook.author}</div>
-            </div>
-        `;
-    }
-
-    // 獲取真實封面（優先手動指定，再搜尋中文版）
-    const coverResult = await tryGetBookCover(randomBook.isbn, randomBook.title, randomBook.author, randomBook.coverUrl);
-
-    if (coverResult && coverResult.url) {
-        // 先顯示載入中，準備載入真實封面
-        const img = new Image();
-
-        // 圖片載入成功
-        img.onload = function() {
-            // 檢查是否為有效封面（不是佔位圖）
-            if (isValidCoverImage(img)) {
-                console.log('✅ 成功載入真實封面');
-                bookCover.style.background = 'none';
-                bookCover.innerHTML = `
-                    <img src="${coverResult.url}"
-                         alt="${randomBook.title}"
-                         class="book-cover-image"
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
-                `;
-            } else {
-                console.log('⚠️ 偵測到佔位圖，使用設計封面');
-                showDesignedCover();
-            }
-        };
-
-        // 圖片載入失敗，顯示設計封面
-        img.onerror = function() {
-            console.log('❌ 封面圖片載入失敗，使用設計封面');
-            showDesignedCover();
-        };
-
-        // 開始載入圖片
-        img.src = coverResult.url;
-
-        // 設定 3 秒超時，如果還沒載入完成就顯示設計封面
-        setTimeout(() => {
-            if (!img.complete) {
-                console.log('⏱️ 圖片載入超時，使用設計封面');
-                showDesignedCover();
-            }
-        }, 3000);
-    } else {
-        // 沒有找到封面，使用設計封面
-        console.log('🎨 未找到線上封面，使用設計封面');
-        showDesignedCover();
-    }
+    // 直接顯示設計封面（方案 A：穩定可靠）
+    console.log(`🎨 顯示《${randomBook.title}》的設計封面`);
+    bookCover.style.background = 'linear-gradient(135deg, var(--primary-cyan), var(--primary-purple))';
+    bookCover.innerHTML = `
+        <div class="cover-content">
+            <div class="cover-emoji">${randomBook.emoji}</div>
+            <div class="cover-title">${randomBook.title}</div>
+            <div class="cover-divider"></div>
+            <div class="cover-author">${randomBook.author}</div>
+        </div>
+    `;
 }
 
 // 粒子背景動畫
