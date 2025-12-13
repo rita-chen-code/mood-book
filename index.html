@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心情選書機 | Mood Book Selector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 科技感背景動畫 -->
+    <div class="tech-background">
+        <div class="grid-overlay"></div>
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="title-wrapper">
+                <div class="icon-container">
+                    <svg class="tech-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#7000ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M20,30 L80,30 L80,70 L20,70 Z M30,40 L50,40 M30,50 L70,50 M30,60 L60,60"
+                              stroke="url(#iconGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <circle cx="50" cy="50" r="35" stroke="url(#iconGradient)" stroke-width="2" fill="none" opacity="0.3"/>
+                    </svg>
+                </div>
+                <h1>心情選書機</h1>
+                <div class="subtitle-wrapper">
+                    <span class="line"></span>
+                    <p class="subtitle">AI 智能推薦系統</p>
+                    <span class="line"></span>
+                </div>
+            </div>
+        </header>
+
+        <div class="mood-selector" id="moodSelector">
+            <h2>你現在的心情是...</h2>
+            <div class="mood-grid">
+                <button class="mood-btn" data-mood="happy">
+                    <span class="emoji">😊</span>
+                    <span class="mood-name">開心</span>
+                </button>
+                <button class="mood-btn" data-mood="sad">
+                    <span class="emoji">😢</span>
+                    <span class="mood-name">憂鬱</span>
+                </button>
+                <button class="mood-btn" data-mood="excited">
+                    <span class="emoji">🤩</span>
+                    <span class="mood-name">興奮</span>
+                </button>
+                <button class="mood-btn" data-mood="calm">
+                    <span class="emoji">😌</span>
+                    <span class="mood-name">平靜</span>
+                </button>
+                <button class="mood-btn" data-mood="anxious">
+                    <span class="emoji">😰</span>
+                    <span class="mood-name">焦慮</span>
+                </button>
+                <button class="mood-btn" data-mood="curious">
+                    <span class="emoji">🤔</span>
+                    <span class="mood-name">好奇</span>
+                </button>
+                <button class="mood-btn" data-mood="tired">
+                    <span class="emoji">😴</span>
+                    <span class="mood-name">疲憊</span>
+                </button>
+                <button class="mood-btn" data-mood="inspired">
+                    <span class="emoji">✨</span>
+                    <span class="mood-name">靈感</span>
+                </button>
+                <button class="mood-btn" data-mood="angry">
+                    <span class="emoji">😠</span>
+                    <span class="mood-name">憤怒</span>
+                </button>
+                <button class="mood-btn" data-mood="lonely">
+                    <span class="emoji">😔</span>
+                    <span class="mood-name">孤獨</span>
+                </button>
+                <button class="mood-btn" data-mood="romantic">
+                    <span class="emoji">🥰</span>
+                    <span class="mood-name">浪漫</span>
+                </button>
+                <button class="mood-btn" data-mood="motivated">
+                    <span class="emoji">💪</span>
+                    <span class="mood-name">充滿動力</span>
+                </button>
+                <button class="mood-btn" data-mood="nostalgic">
+                    <span class="emoji">🌅</span>
+                    <span class="mood-name">懷舊</span>
+                </button>
+                <button class="mood-btn" data-mood="confused">
+                    <span class="emoji">😵</span>
+                    <span class="mood-name">困惑</span>
+                </button>
+                <button class="mood-btn" data-mood="adventurous">
+                    <span class="emoji">🚀</span>
+                    <span class="mood-name">冒險</span>
+                </button>
+                <button class="mood-btn" data-mood="grateful">
+                    <span class="emoji">🙏</span>
+                    <span class="mood-name">感恩</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <div class="book-card">
+                <div class="book-cover" id="bookCover"></div>
+                <div class="book-info">
+                    <h3 id="bookTitle"></h3>
+                    <p class="author" id="bookAuthor"></p>
+                    <p class="description" id="bookDescription"></p>
+                    <div class="tags" id="bookTags"></div>
+                    <button class="retry-btn" id="retryBtn">重新選擇心情</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
